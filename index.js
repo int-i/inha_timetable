@@ -113,8 +113,10 @@ const getTimeTable = async (dept = undefined, type = '전공', isDebug = true, o
     if(!(type in types)){
       throw new Error("type을 제대로 입력해주세요. [ "+Object.keys(types).join(' ')+' ]')
     }
-    if(outputFile.indexOf('.') == -1 || outputFile.indexOf('.')==outputFile.length-1){
-      throw new Error("파일이름에 확장자가 필요합니다.'")
+    if(outputFile){
+      if(outputFile.indexOf('.') == -1 || outputFile.indexOf('.')==outputFile.length-1){
+        throw new Error("파일이름에 확장자가 필요합니다.'")
+      }  
     }
     const options = {
       url: 'http://sugang.inha.ac.kr/sugang/SU_51001/Lec_Time_Search.aspx',
@@ -147,7 +149,10 @@ const getTimeTable = async (dept = undefined, type = '전공', isDebug = true, o
       if(type == '전공' && json.category=='교양필수') continue
       if(type == '교양필수' && json.category.indexOf('전공')!=-1) continue
 
-      datas.push(td2json(tds))
+      if(type == '전공' || type == '교양필수'){
+        datas.push(Object.assign({dept}, td2json(tds)))
+      }
+      else datas.push(td2json(tds))
     }
     log(`파싱 완료!`)
     if(outputFile){
