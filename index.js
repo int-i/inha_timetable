@@ -23,7 +23,7 @@ const td2json = function (tds, category){
     subject: tds[2].getText(),
     grade: tds[3].getText(),
     credit: tds[4].getText(),
-    category: category?'핵심교양':tds[5].getText(),
+    category: category=='핵심교양'?'핵심교양':tds[5].getText(),
     time: getTime(str),
     place: getPlace(str),
     detail_place: str,
