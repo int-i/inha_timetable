@@ -1,6 +1,6 @@
 {
   "name": "inha-timetable",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "인하대학교 수강신청 시간표 크롤러",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,7 @@
     "fs-extra": "^7.0.1",
     "iconv-lite": "^0.4.24",
     "jssoup": "0.0.10",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "v-suggest": "^1.1.3"
   }
 }

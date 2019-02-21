@@ -16,14 +16,14 @@ const values = require('./data/values')
  * td가 담긴 JSSoup 객체를 json으로 바꿔줍니다.
  * @param {object} tds 
  */
-const td2json = function (tds){
+const td2json = function (tds, category){
   const str = tds[6].getText()
   return {
     sno: tds[0].getText(),
     subject: tds[2].getText(),
     grade: tds[3].getText(),
     credit: tds[4].getText(),
-    category: tds[5].getText(),
+    category: category?'핵심교양':tds[5].getText(),
     time: getTime(str),
     place: getPlace(str),
     detail_place: str,
@@ -70,6 +70,12 @@ const getDeptCode = (deptName) =>{
     return undefined
   }
   else return deptData[deptName]
+}
+const getDeptName = (deptCode) => {
+  for(let i in deptData){
+    if(deptData[i] == deptCode) return i
+  }
+  return undefined
 }
 /**
  * 시간표를 {@link http://sugang.inha.ac.kr 인하대학교 수강신청}에서 가져옵니다.
@@ -143,16 +149,17 @@ const getTimeTable = async (dept = undefined, type = '전공', isDebug = true, o
     const trs = tbody.findAll('tr')
     for(const tr of trs){
       const tds = tr.findAll('td', 'Center')
-      const json = td2json(tds)
+      const json = td2json(tds, type)
+      const deptName = getDeptName(dept)
 
       // ddlKita:1 에는 전공과 교양필수가 둘 다 포함되어있다.
       if(type == '전공' && json.category=='교양필수') continue
       if(type == '교양필수' && json.category.indexOf('전공')!=-1) continue
 
       if(type == '전공' || type == '교양필수'){
-        datas.push(Object.assign({dept}, td2json(tds)))
+        datas.push(Object.assign({dept, deptName}, json))
       }
-      else datas.push(td2json(tds))
+      else datas.push(json)
     }
     log(`파싱 완료!`)
     if(outputFile){
