@@ -1,5 +1,5 @@
 const request = require('request-promise')
-const fs = require('fs-extra')
+const fsPromises = require('fs').promises;
 const iconv = require('iconv-lite')
 const JSSoup = require('jssoup').default
 
@@ -163,7 +163,7 @@ const getTimeTable = async (dept = undefined, type = '전공', isDebug = true, o
     }
     log(`파싱 완료!`)
     if(outputFile){
-      await fs.writeFile(outputFile, JSON.stringify(datas, null, 2))
+      await fsPromises.writeFile(outputFile, JSON.stringify(datas, null, 2))
       log(`파일 쓰기 완료!`)
     } 
     if(isDebug) console.timeEnd('parse')
