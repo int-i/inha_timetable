@@ -1,5 +1,5 @@
 const request = require('request-promise')
-const fs = require('fs-extra')
+const fsPromises = require('fs').promises;
 const iconv = require('iconv-lite')
 const JSSoup = require('jssoup').default
 
@@ -141,7 +141,7 @@ const getTimeTable = async (dept = undefined, type = '전공', isDebug = true, o
     if(!html){
       throw new Error("네트워크가 연결되어있지 않거나 올바르지 않은 학과번호입니다. 사이트가 닫혀있을 수도 있습니다.")
     }
-    const soup = new JSSoup(iconv.decode(new Buffer(html), 'EUC-KR').toString())
+    const soup = new JSSoup(iconv.decode(Buffer.from(html), 'EUC-KR').toString())
     const tbody = soup.find('tbody')
 
     log('HTML 다운로드 완료')
@@ -163,7 +163,7 @@ const getTimeTable = async (dept = undefined, type = '전공', isDebug = true, o
     }
     log(`파싱 완료!`)
     if(outputFile){
-      await fs.writeFile(outputFile, JSON.stringify(datas, null, 2))
+      await fsPromises.writeFile(outputFile, JSON.stringify(datas, null, 2))
       log(`파일 쓰기 완료!`)
     } 
     if(isDebug) console.timeEnd('parse')
