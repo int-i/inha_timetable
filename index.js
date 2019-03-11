@@ -141,7 +141,7 @@ const getTimeTable = async (dept = undefined, type = '전공', isDebug = true, o
     if(!html){
       throw new Error("네트워크가 연결되어있지 않거나 올바르지 않은 학과번호입니다. 사이트가 닫혀있을 수도 있습니다.")
     }
-    const soup = new JSSoup(iconv.decode(new Buffer(html), 'EUC-KR').toString())
+    const soup = new JSSoup(iconv.decode(Buffer.from(html), 'EUC-KR').toString())
     const tbody = soup.find('tbody')
 
     log('HTML 다운로드 완료')
