@@ -9,6 +9,10 @@
     "information",
     "crawler"
   ],
+  "directories": {
+    "bin": "bin",
+    "lib": "lib"
+  },
   "dependencies": {
     "iconv-lite": "^0.4.24",
     "jssoup": "0.0.10",
@@ -20,9 +24,10 @@
     "standard": "^12.0.1"
   },
   "scripts": {
+    "crawler": "node bin/crawler.js",
     "docs": "jsdoc lib/index.js -d docs",
     "lint": "standard",
-    "lint:fix": "standard --fix"
+    "lint:fix": "standard --fix "
   },
   "repository": {
     "type": "git",
@@ -36,5 +41,10 @@
   "bugs": {
     "url": "https://github.com/Agrajak/inha_timetable/issues"
   },
-  "homepage": "https://github.com/Agrajak/inha_timetable#readme"
+  "homepage": "https://github.com/Agrajak/inha_timetable#readme",
+  "standard": {
+    "ignore": [
+      "docs/"
+    ]
+  }
 }
