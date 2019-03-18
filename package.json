@@ -2,16 +2,39 @@
   "name": "inha-timetable",
   "version": "1.0.7",
   "description": "인하대학교 수강신청 시간표 크롤러",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "agrajak <korbots@gmail.com>",
-  "license": "MIT",
+  "main": "lib/index.js",
+  "keywords": [
+    "inha-university",
+    "course",
+    "information",
+    "crawler"
+  ],
   "dependencies": {
     "iconv-lite": "^0.4.24",
     "jssoup": "0.0.10",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
-  }
+  },
+  "devDependencies": {
+    "jsdoc": "^3.5.5",
+    "standard": "^12.0.1"
+  },
+  "scripts": {
+    "docs": "jsdoc lib/index.js -d docs",
+    "lint": "standard",
+    "lint:fix": "standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Agrajak/inha_timetable.git"
+  },
+  "contributors": [
+    "Suhyun Jeon <korbots@gmail.com>",
+    "Seungjae Park <astro.psj@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Agrajak/inha_timetable/issues"
+  },
+  "homepage": "https://github.com/Agrajak/inha_timetable#readme"
 }
