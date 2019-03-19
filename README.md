@@ -32,6 +32,6 @@ getTimeTable(getDeptCode('정보통신공학과'), '교양필수')
 **Returns**: <code>Array</code> - 시간표 배열을 반환합니다.
 
 | Param | Type | Description |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | dept | <code>string</code> | 학과 코드 |
 | category | <code>string</code> | 전공,영어,핵심교양,교양필수,일반교양 |
