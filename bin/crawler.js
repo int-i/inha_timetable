@@ -11,7 +11,7 @@ const rl = readline.createInterface({
 rl.question('Select your department name: ', (deptName) => {
   const deptCode = getDeptCode(deptName)
   if (deptCode) {
-    rl.question('Select a course category which will be crawled: (전공, 교필, 영어, 핵교, 일교) ', async (category) => {
+    rl.question('Select a course category which will be crawled: (필수, 전공, 교필, 영어, 핵교, 일교) ', async (category) => {
       getTimeTable(deptCode, category)
         .then(courses => fs.writeFileSync(`${category}.json`, JSON.stringify(courses, null, 4)))
         .catch(e => console.error('Error: Unexpected course category name'))

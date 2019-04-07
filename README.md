@@ -7,31 +7,32 @@
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
 ## 설치
-```
+
+```bash
 npm install --save inha-timetable
 ```
 
 ## 사용
+
 ```js
 const fs = require('fs')
 const { getTimeTable, getDeptCode } = require('inha-timetable')
 
-getTimeTable(getDeptCode('정보통신공학과'), '교양필수')
-.then(r=>{
-  console.log(r)
-  fs.writeFileSync('result.json', JSON.stringify(r, null, 4))
-})
-.catch(e=>{
-  console.log(e)
-})
+getTimeTable(getDeptCode('정보통신공학과'), '전공')
+  .then(courses => {
+    console.log(courses)
+    fs.writeFileSync('courses.json', JSON.stringify(courses, null, 4))
+  })
+  .catch(e => console.error(e))
 ```
 
-## getTimeTable(dept, category) ⇒ <code>Array</code>
+## getTimeTable(deptCode, category) ⇒ `Array`
+
 시간표를 [인하대학교 수강신청](http://sugang.inha.ac.kr)에서 가져옵니다.
 
-**Returns**: <code>Array</code> - 시간표 배열을 반환합니다.
+**Returns**: `Array` - 시간표 배열을 반환합니다.
 
-| Param | Type | Description |
-| --- | --- | --- |
-| dept | <code>string</code> | 학과 코드 |
-| category | <code>string</code> | 전공,영어,핵심교양,교양필수,일반교양 |
+| Param    | Type     | Description                                              |
+| -------- | -------- | -------------------------------------------------------- |
+| deptCode | `string` | 학과 코드                                                 |
+| category | `string` | 필수(전공+교양필수), 전공, 교양필수, 영어, 핵심교양, 일반교양 |
